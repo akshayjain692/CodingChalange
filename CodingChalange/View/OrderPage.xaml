@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CodingChalange.View.OrderPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CodingChalange.Converter"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    Title="{Binding Customer.IsGoldCustomer, Converter={StaticResource TitleConverter}}"
+    NavigationPage.HasBackButton="False"
+    NavigationPage.HasNavigationBar="True">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolToCustomerConverter x:Key="TitleConverter" />
+
+            <Style x:Key="PlaceHolderLabelStyle" TargetType="Label">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="Gray" />
+            </Style>
+
+
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand" />
+                <Setter Property="BackgroundColor" Value="#008CBA" />
+            </Style>
+
+
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="Body" />
+            </Style>
+
+            <pancake:Border
+                x:Key="Border"
+                Thickness="1"
+                Color="Black" />
+
+            <pancake:DropShadow
+                x:Key="Shadow"
+                Offset="10,10"
+                Color="#000000" />
+
+
+
+            <Style TargetType="pancake:PancakeView">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Border" Value="{StaticResource Border}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+
+        </ResourceDictionary>
+
+
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding CloseCommand}"
+            Order="Primary"
+            Priority="0"
+            Text="Close" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="AliceBlue" Spacing="50">
+            <Grid
+                Margin="5"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="0"
+                RowSpacing="0">
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource PlaceHolderLabelStyle}"
+                    Text="Gold Price (per gram)" />
+
+
+                <pancake:PancakeView Grid.Column="1">
+                    <Entry Text="{Binding PerGramPrice, Mode=TwoWay}" />
+                </pancake:PancakeView>
+
+            </Grid>
+
+            <Grid
+                Margin="5"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="0"
+                RowSpacing="0">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource PlaceHolderLabelStyle}"
+                    Text="Weight (grams)" />
+
+                <pancake:PancakeView Grid.Column="1">
+                    <Entry Text="{Binding WeightGrams, Mode=TwoWay}" />
+                </pancake:PancakeView>
+
+            </Grid>
+
+            <Grid
+                Margin="5"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="0"
+                IsVisible="{Binding Customer.IsGoldCustomer}"
+                RowSpacing="0">
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource PlaceHolderLabelStyle}"
+                    Text="Discount" />
+
+
+                <pancake:PancakeView Grid.Column="1">
+                    <Entry Text="{Binding Discount, Mode=TwoWay}" />
+                </pancake:PancakeView>
+
+            </Grid>
+
+            <Grid
+                Margin="5"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="0"
+                RowSpacing="0">
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource PlaceHolderLabelStyle}"
+                    Text="Total Price" />
+
+                <pancake:PancakeView Grid.Column="1">
+                    <Entry IsReadOnly="True" Text="{Binding Total}" />
+                </pancake:PancakeView>
+
+            </Grid>
+
+            <Button
+                Command="{Binding CalculateCommand}"
+                Style="{StaticResource ButtonStyle}"
+                Text="Calculate" />
+
+            <Button
+                Grid.Row="1"
+                Command="{Binding PrintCommand}"
+                Style="{StaticResource ButtonStyle}"
+                Text="Print Options" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

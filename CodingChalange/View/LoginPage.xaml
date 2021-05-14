@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CodingChalange.View.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    NavigationPage.BackButtonTitle="false"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
+
+    <ContentPage.Resources>
+        <Style x:Key="FieldFrame" TargetType="Frame">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="Visual" Value="Material" />
+        </Style>
+
+        <Style x:Key="FieldEntry" TargetType="Entry">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="PlaceholderColor" Value="Gray" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Visual" Value="Material" />
+        </Style>
+
+        <Color x:Key="FlyoutGradientStart">#8693ab</Color>
+        <Color x:Key="FlyoutGradientEnd">#bdd4e7</Color>
+
+
+        <LinearGradientBrush x:Key="PrimaryGradient" EndPoint="0,1">
+            <GradientStop Offset="0.1" Color="{StaticResource FlyoutGradientEnd}" />
+            <GradientStop Offset="0.8" Color="{StaticResource FlyoutGradientStart}" />
+        </LinearGradientBrush>
+
+        <pancake:Border
+            x:Key="Border"
+            Thickness="1"
+            Color="Black" />
+
+
+        <Style TargetType="pancake:PancakeView">
+            <Setter Property="Border" Value="{StaticResource Border}" />
+            <Setter Property="CornerRadius" Value="150" />
+        </Style>
+
+
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid Padding="20" Background="{StaticResource PrimaryGradient}">
+            <ScrollView>
+                <pancake:PancakeView>
+                    <Grid
+                        x:Name="Root"
+                        Margin="0,12"
+                        HorizontalOptions="FillAndExpand"
+                        RowSpacing="12"
+                        VerticalOptions="Center">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <lottie:AnimationView
+                            Animation="login.json"
+                            AnimationSource="EmbeddedResource"
+                            AutoPlay="true"
+                            HeightRequest="120"
+                            RepeatMode="Infinite" />
+
+                        <Frame Grid.Row="1" Style="{StaticResource FieldFrame}">
+                            <Entry
+                                Placeholder="User Name"
+                                ReturnType="Next"
+                                Style="{StaticResource FieldEntry}"
+                                Text="{Binding UserName, Mode=TwoWay}" />
+                        </Frame>
+
+                        <Frame Grid.Row="2" Style="{StaticResource FieldFrame}">
+                            <Entry
+                                IsPassword="True"
+                                Placeholder="Password"
+                                ReturnType="Send"
+                                Style="{StaticResource FieldEntry}"
+                                Text="{Binding Password}" />
+                        </Frame>
+
+                        <Path
+                            Grid.Row="3"
+                            Margin="50"
+                            Data="M28.7,27.9c0,0,0,0.1,0,0.1c-0.1,0.2-0.5,0.5-0.7,0.6c-0.5,0.5-1.1,0.9-1.6,1.4c-0.8,0.7-1.5,1.4-2.3,2  c-0.7,0.6-0.8,1.1,0,1.8c0.9,0.8,1.6,1.8,2.4,2.7c3.8-3.7,7.2-7.2,10.7-10.7c0.7-0.7,0.8-1.1,0-1.8c-3.3-3.2-6.6-6.5-9.8-9.8  c-0.7-0.7-1-0.5-1.6,0c-2.7,2.6-2.7,2.5-0.1,5.1c0.6,0.6,1.3,1.2,1.9,1.8c0.2,0.2,0.6,0.4,0.7,0.6c0.4,0.7-0.8,0.6-1.1,0.6  c-8.3,0-16.5,0-24.8,0c-1.4,0-1.6-0.3-1.4-1.7C2.6,10.1,12.5,1.3,23.4,0.8c11.7-0.5,22.1,7,25,18.2c3.4,13.3-4.8,26.5-18.3,29.7  c-3.3,0.8-6.7,0.8-10,0.1c-3.2-0.7-6.3-2-9-3.9c-2.7-1.9-5.1-4.4-6.8-7.2c-0.9-1.5-1.7-3-2.2-4.7c-0.3-0.8-0.5-1.7-0.7-2.5  C1.2,30,1.1,29.6,1,29.2c-0.1-0.4-0.2-0.8-0.2-1.2C1,27.4,1.5,27.4,2,27.4c4.9,0,9.8,0,14.6,0c2.1,0,4.2,0,6.2,0c1,0,2.1,0,3.1,0  c0.5,0,1,0,1.5,0C27.8,27.4,28.7,27.4,28.7,27.9z"
+                            Fill="black"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Path.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding LoginCommand}" />
+                            </Path.GestureRecognizers>
+                        </Path>
+
+
+                    </Grid>
+                </pancake:PancakeView>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

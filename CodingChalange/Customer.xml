@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Table>
+  <Customers>
+    <Customer UserName="test1" Password="test1" IsGoldCustomer="True"/>
+    <Customer UserName="test2"  Password="test2" IsGoldCustomer="False"/>
+  </Customers>
+</Table>
